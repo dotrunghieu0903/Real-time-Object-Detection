@@ -8,7 +8,7 @@ import torch.nn as nn
 import torchvision
 torchvision.disable_beta_transforms_warning()
 from torchvision import tv_tensors as datapoints
-
+from torchvision.ops import BoundingBoxFormat
 import torchvision.transforms.v2 as T
 import torchvision.transforms.v2.functional as F
 
@@ -124,8 +124,8 @@ class ConvertBox(T.Transform):
         self.normalize = normalize
 
         self.data_fmt = {
-            'xyxy': datapoints.BoundingBoxesFormat.XYXY,
-            'cxcywh': datapoints.BoundingBoxesFormat.CXCYWH
+            'xyxy': BoundingBoxFormat.XYXY,
+            'cxcywh': BoundingBoxFormat.CXCYWH
         }
 
     def _transform(self, inpt: Any, params: Dict[str, Any]) -> Any:  
