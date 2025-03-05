@@ -14,7 +14,7 @@ train_dataloader:
         - {type: Resize, size: [640, 640], }
         # - {type: Resize, size: 639, max_size: 640}
         # - {type: PadToSize, spatial_size: 640}
-        - {type: ToImageTensor}
+        - {type: ToPureTensor}
         - {type: ConvertDtype}
         - {type: SanitizeBoundingBox, min_size: 1}
         - {type: ConvertBox, out_fmt: 'cxcywh', normalize: True}
@@ -31,7 +31,7 @@ val_dataloader:
         # - {type: Resize, size: 639, max_size: 640}
         # - {type: PadToSize, spatial_size: 640}
         - {type: Resize, size: [640, 640]}
-        - {type: ToImageTensor}
+        - {type: ToPureTensor}
         - {type: ConvertDtype}
   shuffle: False
   batch_size: 8
