@@ -10,21 +10,21 @@ if importlib.metadata.version('torchvision') == '0.15.2':
 
     from torchvision.tv_tensors import BoundingBox as BoundingBoxes
     from torchvision.tv_tensors import BoundingBoxFormat, Mask, Image, Video
-    from torchvision.transforms.v2 import SanitizeBoundingBox as SanitizeBoundingBoxes
+    from torchvision.transforms.v2 import SanitizeBoundingBoxes as SanitizeBoundingBoxeses
     _boxes_keys = ['format', 'spatial_size']
 
 elif '0.17' > importlib.metadata.version('torchvision') >= '0.16':
     import torchvision
     torchvision.disable_beta_transforms_warning()
 
-    from torchvision.transforms.v2 import SanitizeBoundingBoxes
+    from torchvision.transforms.v2 import SanitizeBoundingBoxeses
     from torchvision.tv_tensors import (
         BoundingBoxes, BoundingBoxFormat, Mask, Image, Video)
     _boxes_keys = ['format', 'canvas_size']
 
 elif importlib.metadata.version('torchvision') >= '0.17':
     import torchvision
-    from torchvision.transforms.v2 import SanitizeBoundingBoxes
+    from torchvision.transforms.v2 import SanitizeBoundingBoxeses
     from torchvision.tv_tensors import (
         BoundingBoxes, BoundingBoxFormat, Mask, Image, Video)
     _boxes_keys = ['format', 'canvas_size']

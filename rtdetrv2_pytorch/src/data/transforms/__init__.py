@@ -10,7 +10,7 @@ from ._transforms import (
     RandomHorizontalFlip,
     Resize,
     PadToSize,
-    SanitizeBoundingBoxes,
+    SanitizeBoundingBoxeses,
     RandomCrop,
     Normalize,
     ConvertBoxes,

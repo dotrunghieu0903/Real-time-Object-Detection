@@ -28,7 +28,7 @@ RandomHorizontalFlip = register(T.RandomHorizontalFlip)
 Resize = register(T.Resize)
 ToPureTensor = register(T.ToPureTensor)
 ConvertImageDtype = register(T.ConvertImageDtype)
-SanitizeBoundingBox = register(T.SanitizeBoundingBox)
+SanitizeBoundingBoxes = register(T.SanitizeBoundingBoxes)
 RandomCrop = register(T.RandomCrop)
 Normalize = register(T.Normalize)
 
