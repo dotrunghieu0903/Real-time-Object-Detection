@@ -12,7 +12,7 @@ import torchvision
 torchvision.disable_beta_transforms_warning()
 
 from torchvision import tv_tensors as datapoints
-from torchvision.ops import BoundingBoxFormat
+
 from pycocotools import mask as coco_mask
 
 from src.core import register
@@ -44,7 +44,7 @@ class CocoDetection(torchvision.datasets.CocoDetection):
         if 'boxes' in target:
             target['boxes'] = datapoints.BoundingBoxes(
                 target['boxes'], 
-                format=BoundingBoxFormat.XYXY, 
+                format='XYXY', 
                 spatial_size=img.size[::-1]) # h w
 
         if 'masks' in target:
