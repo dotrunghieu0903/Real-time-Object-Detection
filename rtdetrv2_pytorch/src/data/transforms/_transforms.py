@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional
 
 from .._misc import convert_to_tv_tensor, _boxes_keys
 from .._misc import Image, Video, Mask, BoundingBoxeses
-from .._misc import SanitizeBoundingBoxeseses
+from .._misc import SanitizeBoundingBoxeses
 
 from ...core import register
 
@@ -29,7 +29,7 @@ Resize = register()(T.Resize)
 # ToPureTensor = register()(T.ToPureTensor)
 # ConvertImageDtype = register()(T.ConvertImageDtype)
 # PILToTensor = register()(T.PILToTensor)
-SanitizeBoundingBoxeseses = register(name='SanitizeBoundingBoxeseses')(SanitizeBoundingBoxeseses)
+SanitizeBoundingBoxeses = register(name='SanitizeBoundingBoxeses')(SanitizeBoundingBoxeses)
 RandomCrop = register()(T.RandomCrop)
 Normalize = register()(T.Normalize)
 
