@@ -28,7 +28,7 @@ RandomHorizontalFlip = register(T.RandomHorizontalFlip)
 Resize = register(T.Resize)
 ToPureTensor = register(T.ToPureTensor)
 ConvertImageDtype = register(T.ConvertImageDtype)
-SanitizeBoundingBoxes = register(T.SanitizeBoundingBoxes)
+SanitizeBoundingBoxeses = register(T.SanitizeBoundingBoxeses)
 RandomCrop = register(T.RandomCrop)
 Normalize = register(T.Normalize)
 
@@ -73,7 +73,7 @@ class PadToSize(T.Pad):
         datapoints.Image,
         datapoints.Video,
         datapoints.Mask,
-        datapoints.BoundingBox,
+        datapoints.BoundingBoxes,
     )
     def _get_params(self, flat_inputs: List[Any]) -> Dict[str, Any]:
         sz = F.get_spatial_size(flat_inputs[0])
@@ -116,7 +116,7 @@ class RandomIoUCrop(T.RandomIoUCrop):
 @register
 class ConvertBox(T.Transform):
     _transformed_types = (
-        datapoints.BoundingBox,
+        datapoints.BoundingBoxes,
     )
     def __init__(self, out_fmt='', normalize=False) -> None:
         super().__init__()
@@ -124,8 +124,8 @@ class ConvertBox(T.Transform):
         self.normalize = normalize
 
         self.data_fmt = {
-            'xyxy': datapoints.BoundingBoxFormat.XYXY,
-            'cxcywh': datapoints.BoundingBoxFormat.CXCYWH
+            'xyxy': datapoints.BoundingBoxesFormat.XYXY,
+            'cxcywh': datapoints.BoundingBoxesFormat.CXCYWH
         }
 
     def _transform(self, inpt: Any, params: Dict[str, Any]) -> Any:  
@@ -133,7 +133,7 @@ class ConvertBox(T.Transform):
             spatial_size = inpt.spatial_size
             in_fmt = inpt.format.value.lower()
             inpt = torchvision.ops.box_convert(inpt, in_fmt=in_fmt, out_fmt=self.out_fmt)
-            inpt = datapoints.BoundingBox(inpt, format=self.data_fmt[self.out_fmt], spatial_size=spatial_size)
+            inpt = datapoints.BoundingBoxes(inpt, format=self.data_fmt[self.out_fmt], spatial_size=spatial_size)
         
         if self.normalize:
             inpt = inpt / torch.tensor(inpt.spatial_size[::-1]).tile(2)[None]

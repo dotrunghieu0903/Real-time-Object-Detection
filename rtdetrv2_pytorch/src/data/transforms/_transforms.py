@@ -16,8 +16,8 @@ import PIL.Image
 from typing import Any, Dict, List, Optional
 
 from .._misc import convert_to_tv_tensor, _boxes_keys
-from .._misc import Image, Video, Mask, BoundingBoxes
-from .._misc import SanitizeBoundingBoxeses
+from .._misc import Image, Video, Mask, BoundingBoxeses
+from .._misc import SanitizeBoundingBoxeseses
 
 from ...core import register
 
@@ -29,7 +29,7 @@ Resize = register()(T.Resize)
 # ToPureTensor = register()(T.ToPureTensor)
 # ConvertImageDtype = register()(T.ConvertImageDtype)
 # PILToTensor = register()(T.PILToTensor)
-SanitizeBoundingBoxeses = register(name='SanitizeBoundingBoxeses')(SanitizeBoundingBoxeses)
+SanitizeBoundingBoxeseses = register(name='SanitizeBoundingBoxeseses')(SanitizeBoundingBoxeseses)
 RandomCrop = register()(T.RandomCrop)
 Normalize = register()(T.Normalize)
 
@@ -51,7 +51,7 @@ class PadToSize(T.Pad):
         Image,
         Video,
         Mask,
-        BoundingBoxes,
+        BoundingBoxeses,
     )
     def _get_params(self, flat_inputs: List[Any]) -> Dict[str, Any]:
         sp = F.get_spatial_size(flat_inputs[0])
@@ -93,7 +93,7 @@ class RandomIoUCrop(T.RandomIoUCrop):
 @register()
 class ConvertBoxes(T.Transform):
     _transformed_types = (
-        BoundingBoxes,
+        BoundingBoxeses,
     )
     def __init__(self, fmt='', normalize=False) -> None:
         super().__init__()
