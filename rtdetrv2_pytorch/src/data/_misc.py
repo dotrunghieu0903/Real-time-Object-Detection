@@ -8,8 +8,8 @@ if importlib.metadata.version('torchvision') == '0.15.2':
     import torchvision
     torchvision.disable_beta_transforms_warning()
 
-    from torchvision.datapoints import BoundingBox as BoundingBoxes
-    from torchvision.datapoints import BoundingBoxFormat, Mask, Image, Video
+    from torchvision.tv_tensors import BoundingBox as BoundingBoxes
+    from torchvision.tv_tensors import BoundingBoxFormat, Mask, Image, Video
     from torchvision.transforms.v2 import SanitizeBoundingBox as SanitizeBoundingBoxes
     _boxes_keys = ['format', 'spatial_size']
 

@@ -7,7 +7,7 @@ import torch.nn as nn
 
 import torchvision
 torchvision.disable_beta_transforms_warning()
-from torchvision import datapoints
+from torchvision import tv_tensors as datapoints
 
 import torchvision.transforms.v2 as T
 import torchvision.transforms.v2.functional as F

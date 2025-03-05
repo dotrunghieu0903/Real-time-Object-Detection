@@ -11,7 +11,7 @@ import torch.utils.data
 import torchvision
 torchvision.disable_beta_transforms_warning()
 
-from torchvision import datapoints
+from torchvision import tv_tensors as datapoints
 
 from pycocotools import mask as coco_mask
 
