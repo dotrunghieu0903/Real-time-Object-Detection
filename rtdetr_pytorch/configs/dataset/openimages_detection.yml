@@ -6,7 +6,7 @@ remap_mscoco_category: False  # No COCO remapping needed
 train_dataloader: 
   type: DataLoader
   dataset: 
-    type: OpenImagesDetection  # Use OpenImages dataset
+    type: CocoDetection  # Use OpenImages dataset
     img_folder: ./dataset/openimages/train/  # Update path to Open Images
     ann_file: ./dataset/openimages/annotations/oidv6-train-annotations-bbox.csv  # OpenImages uses CSV annotations
     class_desc_file: ./dataset/openimages/annotations/oidv6-class-descriptions.csv  # Class label mappings
@@ -21,7 +21,7 @@ train_dataloader:
 val_dataloader:
   type: DataLoader
   dataset: 
-    type: OpenImagesDetection
+    type: CocoDetection
     img_folder: ./dataset/openimages/val/
     ann_file: ./dataset/openimages/annotations/oidv6-validation-annotations-bbox.csv
     class_desc_file: ./dataset/openimages/annotations/oidv6-class-descriptions.csv
