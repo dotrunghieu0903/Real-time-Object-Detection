@@ -1,0 +1,35 @@
+task: detection
+
+num_classes: 601  # Open Images V6 has 601 object classes
+remap_mscoco_category: False  # No COCO remapping needed
+
+train_dataloader: 
+  type: DataLoader
+  dataset: 
+    type: OpenImagesDetection  # Use OpenImages dataset
+    img_folder: ./dataset/openimages/train/  # Update path to Open Images
+    ann_file: ./dataset/openimages/annotations/oidv6-train-annotations-bbox.csv  # OpenImages uses CSV annotations
+    class_desc_file: ./dataset/openimages/annotations/oidv6-class-descriptions.csv  # Class label mappings
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  batch_size: 8
+  num_workers: 4
+  drop_last: True 
+
+val_dataloader:
+  type: DataLoader
+  dataset: 
+    type: OpenImagesDetection
+    img_folder: ./dataset/openimages/val/
+    ann_file: ./dataset/openimages/annotations/oidv6-validation-annotations-bbox.csv
+    class_desc_file: ./dataset/openimages/annotations/oidv6-class-descriptions.csv
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 8
+  num_workers: 4
+  drop_last: False
