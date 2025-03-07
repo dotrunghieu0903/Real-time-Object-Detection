@@ -1,0 +1,33 @@
+task: detection
+
+num_classes: 365  # Changed from 80 to 365 categories
+remap_mscoco_category: False  # Disabled COCO category remapping
+
+train_dataloader: 
+  type: DataLoader
+  dataset: 
+    type: CocoDetection  # Assuming Object365 uses COCO format annotations
+    img_folder: ./dataset/objects365/train/
+    ann_file: ./dataset/objects365/annotations/objects365_train.json
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  batch_size: 8
+  num_workers: 4
+  drop_last: True 
+
+val_dataloader:
+  type: DataLoader
+  dataset: 
+    type: CocoDetection
+    img_folder: ./dataset/objects365/val/
+    ann_file: ./dataset/objects365/annotations/objects365_val.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 8
+  num_workers: 4
+  drop_last: False
