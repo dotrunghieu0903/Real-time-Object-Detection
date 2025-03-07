@@ -8,8 +8,8 @@ train_dataloader:
   dataset: 
     type: CocoDetection  # Use OpenImages dataset
     img_folder: ./dataset/openimages/train/  # Update path to Open Images
-    ann_file: ./dataset/openimages/annotations/oidv6-train-annotations-bbox.csv  # OpenImages uses CSV annotations
-    class_desc_file: ./dataset/openimages/annotations/oidv6-class-descriptions.csv  # Class label mappings
+    ann_file: ./dataset/openimages/train-annotations-bbox.csv  # OpenImages uses CSV annotations
+    class_desc_file: ./dataset/openimages/class-descriptions.csv  # Class label mappings
     transforms:
       type: Compose
       ops: ~
@@ -23,8 +23,8 @@ val_dataloader:
   dataset: 
     type: CocoDetection
     img_folder: ./dataset/openimages/val/
-    ann_file: ./dataset/openimages/annotations/oidv6-validation-annotations-bbox.csv
-    class_desc_file: ./dataset/openimages/annotations/oidv6-class-descriptions.csv
+    ann_file: ./dataset/openimages/annotations/train-annotations-bbox.csv
+    class_desc_file: ./dataset/openimages/class-descriptions.csv
     transforms:
       type: Compose
       ops: ~ 
