@@ -1,5 +1,6 @@
 
 from .coco import *
+from .voc import *
 from .cifar10 import CIFAR10
 
 from .dataloader import *
