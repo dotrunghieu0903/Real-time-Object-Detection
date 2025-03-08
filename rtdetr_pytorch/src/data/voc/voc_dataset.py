@@ -7,10 +7,10 @@ torchvision.disable_beta_transforms_warning()
 
 from src.core import register
 
-__all__ = ['VOC2012Detection']
+__all__ = ['VOCDetection']
 
 @register
-class VOC2012Detection(VOCDetection):
+class VOCDetection(VOCDetection):
     __inject__ = ['transforms']
     
     def __init__(self, img_folder, ann_file, transforms=None):
