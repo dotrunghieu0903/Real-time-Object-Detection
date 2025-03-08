@@ -14,11 +14,11 @@ class VOCDetection(VOCDetection):
     __inject__ = ['transforms']
     
     def __init__(self, img_folder, ann_file, transforms=None):
-        super(VOC2012Detection, self).__init__(root=img_folder, year="2012", image_set="train", download=True)
+        super(VOCDetection, self).__init__(root=img_folder, year="2012", image_set="train", download=True)
         self._transforms = transforms
     
     def __getitem__(self, idx):
-        img, target = super(VOC2012Detection, self).__getitem__(idx)
+        img, target = super(VOCDetection, self).__getitem__(idx)
         image_id = idx
         target = {'image_id': image_id, 'annotations': target}
         img, target = self.prepare(img, target)
