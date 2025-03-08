@@ -53,7 +53,7 @@ class VOC2012Detection(VOCDetection):
     def extra_repr(self) -> str:
         return f' img_folder: {self.root}\n year: 2012\n'
 
-voc2012_category2name = {
+voc_category2name = {
     1: "aeroplane",
     2: "bicycle",
     3: "bird",
@@ -76,5 +76,5 @@ voc2012_category2name = {
     20: "tvmonitor"
 }
 
-voc_category2label = {k: i for i, k in enumerate(voc2012_category2name.keys())}
+voc_category2label = {k: i for i, k in enumerate(voc_category2name.keys())}
 voc_label2category = {v: k for k, v in voc_category2label.items()}
