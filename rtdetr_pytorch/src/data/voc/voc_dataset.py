@@ -77,4 +77,4 @@ voc2012_category2name = {
 }
 
 voc_category2label = {k: i for i, k in enumerate(voc2012_category2name.keys())}
-voc_label2category
+voc_label2category = {v: k for k, v in voc_category2label.items()}
