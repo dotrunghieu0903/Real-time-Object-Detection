@@ -178,27 +178,25 @@ def convert_to_coco_api(ds):
         # find better way to get target
         # targets = ds.get_annotations(img_idx)
         img, targets = ds[img_idx]
-        image_id = targets["image_id"].item()
+        image_id = img_idx  # Assuming image_id is the index of the image
         img_dict = {}
         img_dict["id"] = image_id
         img_dict["height"] = img.shape[-2]
         img_dict["width"] = img.shape[-1]
         dataset["images"].append(img_dict)
-        bboxes = targets["boxes"].clone()
+        
+        # Assuming targets is a tuple of (boxes, labels, area, iscrowd)
+        boxes, labels, area, iscrowd = targets
+        
+        bboxes = boxes.clone()
         # Convert bboxes to [x1, y1, x2, y2] format
         bboxes[:, 2] += bboxes[:, 0]
         bboxes[:, 3] += bboxes[:, 1]
         bboxes = bboxes.tolist()
-        labels = targets["labels"].tolist()
-        areas = targets["area"].tolist()
-        iscrowd = targets["iscrowd"].tolist()
-        if "masks" in targets:
-            masks = targets["masks"]
-            # make masks Fortran contiguous for coco_mask
-            masks = masks.permute(0, 2, 1).contiguous().permute(0, 2, 1)
-        if "keypoints" in targets:
-            keypoints = targets["keypoints"]
-            keypoints = keypoints.reshape(keypoints.shape[0], -1).tolist()
+        labels = labels.tolist()
+        areas = area.tolist()
+        iscrowd = iscrowd.tolist()
+        
         num_objs = len(bboxes)
         for i in range(num_objs):
             ann = {}
@@ -209,11 +207,6 @@ def convert_to_coco_api(ds):
             ann["area"] = areas[i]
             ann["iscrowd"] = iscrowd[i]
             ann["id"] = ann_id
-            if "masks" in targets:
-                ann["segmentation"] = coco_mask.encode(masks[i].numpy())
-            if "keypoints" in targets:
-                ann["keypoints"] = keypoints[i]
-                ann["num_keypoints"] = sum(k != 0 for k in keypoints[i][2::3])
             dataset["annotations"].append(ann)
             ann_id += 1
     # Update categories to match Pascal VOC 2007 classes
@@ -243,7 +236,6 @@ def convert_to_coco_api(ds):
     coco_ds.dataset = dataset
     coco_ds.createIndex()
     return coco_ds
-
 
 def get_coco_api_from_dataset(dataset):
     # FIXME: This is... awful?
