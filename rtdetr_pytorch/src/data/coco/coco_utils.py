@@ -185,8 +185,8 @@ def convert_to_coco_api(ds):
         img_dict["width"] = img.shape[-1]
         dataset["images"].append(img_dict)
         
-        # Assuming targets is a tuple of (boxes, labels, area, iscrowd)
-        boxes, labels, area, iscrowd = targets
+        # Assuming targets is a tuple of (boxes, labels)
+        boxes, labels = targets
         
         bboxes = boxes.clone()
         # Convert bboxes to [x1, y1, x2, y2] format
@@ -194,8 +194,6 @@ def convert_to_coco_api(ds):
         bboxes[:, 3] += bboxes[:, 1]
         bboxes = bboxes.tolist()
         labels = labels.tolist()
-        areas = area.tolist()
-        iscrowd = iscrowd.tolist()
         
         num_objs = len(bboxes)
         for i in range(num_objs):
@@ -204,8 +202,8 @@ def convert_to_coco_api(ds):
             ann["bbox"] = [bboxes[i][0], bboxes[i][1], bboxes[i][2] - bboxes[i][0], bboxes[i][3] - bboxes[i][1]]
             ann["category_id"] = labels[i]
             categories.add(labels[i])
-            ann["area"] = areas[i]
-            ann["iscrowd"] = iscrowd[i]
+            ann["area"] = (bboxes[i][2] - bboxes[i][0]) * (bboxes[i][3] - bboxes[i][1])
+            ann["iscrowd"] = 0
             ann["id"] = ann_id
             dataset["annotations"].append(ann)
             ann_id += 1
