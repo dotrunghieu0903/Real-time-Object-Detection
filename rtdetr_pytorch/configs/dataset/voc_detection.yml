@@ -7,8 +7,8 @@ train_dataloader:
   type: DataLoader
   dataset: 
     type: VOCDetection
-    img_folder: ./dataset/voc2012/VOCdevkit/VOC2012/JPEGImages
-    ann_file: ./dataset/voc2012//VOCdevkit/VOC2012/Annotations
+    img_folder: ./dataset/VOC/VOCdevkit/VOC2007/JPEGImages
+    ann_file: ./dataset/VOC/VOCdevkit/VOC2007/Annotations
     transforms:
       type: Compose
       ops: ~
@@ -22,8 +22,8 @@ val_dataloader:
   type: DataLoader
   dataset: 
     type: VOCDetection
-    img_folder: ./dataset/voc2012/VOCdevkit/VOC2012/JPEGImages
-    ann_file: ./dataset/voc2012//VOCdevkit/VOC2012/Annotations
+    img_folder: ./dataset/VOC/VOCdevkit/VOC2007/JPEGImages
+    ann_file: ./dataset/VOC/VOCdevkit/VOC2007/Annotations
     transforms:
       type: Compose
       ops: ~ 
