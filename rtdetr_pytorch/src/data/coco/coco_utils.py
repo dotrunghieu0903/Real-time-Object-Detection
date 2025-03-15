@@ -193,15 +193,17 @@ def convert_to_coco_api(ds):
         bboxes[:, 2] += bboxes[:, 0]
         bboxes[:, 3] += bboxes[:, 1]
         bboxes = bboxes.tolist()
-        labels = labels.tolist()
+        
+        # Get the labels from the dictionary
+        label_ids = labels['labels'].tolist()
         
         num_objs = len(bboxes)
         for i in range(num_objs):
             ann = {}
             ann["image_id"] = image_id
             ann["bbox"] = [bboxes[i][0], bboxes[i][1], bboxes[i][2] - bboxes[i][0], bboxes[i][3] - bboxes[i][1]]
-            ann["category_id"] = labels[i]
-            categories.add(labels[i])
+            ann["category_id"] = label_ids[i]
+            categories.add(label_ids[i])
             ann["area"] = (bboxes[i][2] - bboxes[i][0]) * (bboxes[i][3] - bboxes[i][1])
             ann["iscrowd"] = 0
             ann["id"] = ann_id
