@@ -189,7 +189,6 @@ def convert_to_coco_api(ds):
         boxes, labels = targets
         
         bboxes = boxes.clone()
-        # Convert bboxes to [x1, y1, x2, y2] format
         bboxes = bboxes.tolist()
         
         # Get the labels from the dictionary
@@ -199,10 +198,10 @@ def convert_to_coco_api(ds):
         for i in range(num_objs):
             ann = {}
             ann["image_id"] = image_id
-            ann["bbox"] = [float(bboxes[i][0]), float(bboxes[i][1]), float(bboxes[i][2]), float(bboxes[i][3])]
+            ann["bbox"] = [bboxes[i][0][0], bboxes[i][0][1], bboxes[i][0][2], bboxes[i][0][3]]
             ann["category_id"] = label_ids[i]
             categories.add(label_ids[i])
-            ann["area"] = float((bboxes[i][2] - bboxes[i][0]) * (bboxes[i][3] - bboxes[i][1]))
+            ann["area"] = (bboxes[i][0][2] - bboxes[i][0][0]) * (bboxes[i][0][3] - bboxes[i][0][1])
             ann["iscrowd"] = 0
             ann["id"] = ann_id
             dataset["annotations"].append(ann)
